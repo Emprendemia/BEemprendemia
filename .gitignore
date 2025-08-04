@@ -1,0 +1,35 @@
+# Ignore all log files
+*.log
+node_modules
+# Ignore the 'temp' directory and its contents
+temp/
+
+# Ignore specific build artifacts
+dist/
+build/
+
+# Ignore IDE-specific files (e.g., for VS Code)
+.vscode/
+
+# Ignore sensitive configuration files
+config.ini
+
+.env
+.env.local
+.node_modules
+.git
+.DS_Store   
+# Ignore compiled TypeScript files
+*.tsbuildinfo
+# Ignore coverage reports
+coverage/
+# Ignore environment variable files
+.env.development
+.env.production 
+.env.test
+# Ignore lock files
+*.lock
+# Ignore build directories
+dist/
+# Ignore test files
+tests/
