@@ -15,6 +15,7 @@ router.get('/teacher/:teacherId', authenticateToken, getCoursesByTeacherId);
 //post
 router.post('/', authenticateToken, createCourse);
 
+
 //put
 router.put('/:courseId', authenticateToken, updateCourse);
 

@@ -11,6 +11,7 @@ const courseSchema = new mongoose.Schema({
   ],
   hours: Number,
   videoUrl: String,
+  image: String,
   teacher: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   category: {
     type: String,
