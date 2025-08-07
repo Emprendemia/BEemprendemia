@@ -13,14 +13,14 @@ export const getAllCourses = async (req: Request, res: Response) => {
 
 export const createCourse = async (req: Request, res: Response) => {
   const teacherId = (req as any).user.id;
-  const { title, description, modules, hours, price, videoUrl, category } = req.body;
+  const { title, description, modules, hours, image, videoUrl, category } = req.body;
 
   const course = new Course({
     title,
     description,
     modules,
     hours,
-    price,
+    image,
     videoUrl,
     category,
     teacher: teacherId,
