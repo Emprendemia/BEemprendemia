@@ -39,7 +39,10 @@ export const updateCourse = async (req: Request, res: Response) => {
   const course = await Course.findById(courseId);
   if (!course) return res.status(404).json({ message: 'Curso no encontrado' });
 
-  if (user.role !== 'admin' && course.teacher.toString() !== user.id) {
+  if (
+    user.role !== 'admin' &&
+    (!course.teacher || course.teacher.toString() !== user.id)
+  ) {
     return res.status(403).json({ message: 'No autorizado' });
   }
 

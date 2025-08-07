@@ -40,16 +40,18 @@ export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
 
-  if (!user || !(await bcrypt.compare(password, user.password))) {
+  if (!user || !user.password) {
     return res.status(401).json({ message: 'Credenciales inválidas' });
   }
 
-  const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, {
-  expiresIn: '7d'
-});
+  const match = await bcrypt.compare(password, user.password);
+  if (!match) {
+    return res.status(401).json({ message: 'Credenciales inválidas' });
+  }
 
+  const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, { expiresIn: '7d' });
 
-  res.json({ token, role:user.role });
+  res.json({ token, role: user.role });
 };
 
 // -------------------- GOOGLE LOGIN --------------------
@@ -110,7 +112,12 @@ export const changePassword = async (req: Request, res: Response) => {
   const { currentPassword, newPassword } = req.body;
   const user = await User.findById((req as any).user.id);
 
-  if (!user || !(await bcrypt.compare(currentPassword, user.password))) {
+  if (!user || !user.password) {
+    return res.status(400).json({ message: 'Usuario no encontrado o sin contraseña' });
+  }
+
+  const match = await bcrypt.compare(currentPassword, user.password);
+  if (!match) {
     return res.status(400).json({ message: 'Contraseña actual incorrecta' });
   }
 
@@ -120,4 +127,3 @@ export const changePassword = async (req: Request, res: Response) => {
 
   res.json({ message: 'Contraseña actualizada' });
 };
-
