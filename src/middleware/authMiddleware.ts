@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecreto';
 
-// Tipamos req.user para no castear a "any"
 declare global {
   namespace Express {
     interface UserPayload {
