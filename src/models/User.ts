@@ -10,7 +10,7 @@ export interface UserDocument extends Document {
   fullname: string;
   email: string;
   password: string;
-  role: 'admin' | 'teacher' | 'user';
+  role: 'admin' | 'teacher' | 'user' | 'owner';
   recentCourses: RecentCourse[];
 }
 
@@ -18,7 +18,7 @@ const userSchema = new Schema<UserDocument>({
   fullname: String,
   email: { type: String, unique: true },
   password: String,
-  role: { type: String, enum: ['admin', 'teacher', 'user'], default: 'user' },
+  role: { type: String, enum: ['admin', 'teacher', 'user', 'owner'], default: 'user' },
   recentCourses: [
     {
       course: { type: Schema.Types.ObjectId, ref: 'Course' },

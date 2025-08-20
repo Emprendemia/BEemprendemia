@@ -17,7 +17,7 @@ app.use(express.json());
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/courses', courseRoutes);
-app.use('/api/v1', adminRoutes);
+app.use('/api/v1/admin', adminRoutes);
 app.use('/upload', uploadRoutes);
 
 export default app;
